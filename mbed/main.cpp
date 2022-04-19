@@ -6,6 +6,7 @@
 
 #define NULL_CHAR 'z'
 
+Serial  pi(USBTX, USBRX);
 BusOut myled(LED1,LED2,LED3,LED4);
 Serial blue(p28,p27);
 uLCD_4DGL uLCD(p28, p27, p29); // create a global uLCD object
@@ -90,6 +91,23 @@ void bt_thread(void const *argument) {
     Thread::wait(1000);
 }
 
+void pi_thread(void const *argument){
+    pi.baud(9600);
+    while (1) {
+        
+        if(pi.readable()) {
+            while (pi.readable()) {
+                temp = pi.getc();
+            }
+        }
+        if (song_ctrl != NULL_CHAR) {
+            pi.putc(song_ctrl);
+            song_ctrl = NULL_CHAR;
+        }
+    }
+    Thread::wait(1000);
+}
+
 
 
 int main()
@@ -98,6 +116,7 @@ int main()
    
     thread.start(display_thread);
     thread.start(bt_thread);
+    thread.start(pi_thread);
    
        
-    }
+}
