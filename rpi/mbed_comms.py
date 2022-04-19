@@ -13,10 +13,11 @@ stopbits=serial.STOPBITS_ONE, bytesize=serial.EIGHTBITS, timeout=1)
 while 1:
     rx_data = ser.read() #read serial data
     sleep(0.03)    
-    data_left = ser.inWaiting()
-    rx_data += ser.data(data_left)
-    if ser.inWaiting != 0:
+    data_left = ser.inWaiting() #wait until data is recieved
+    if data_left != 0:
+        rx_data += ser.data(data_left)
         get_current_song(sp)
         toggle_playback(sp)
+        ser.write(rx_data) #tell mbed to update
 
 #mbed controlling all physical components

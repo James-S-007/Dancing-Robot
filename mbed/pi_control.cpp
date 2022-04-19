@@ -3,28 +3,24 @@
 // connect mbed to Pi USB
 RawSerial  pi(USBTX, USBRX);
 
-DigitalOut led1(LED1);
-DigitalOut led2(LED2);
-DigitalOut led3(LED3);
-DigitalOut led4(LED4);
-
-void dev_recv()
-{
-    char temp = 0;
-    led1 = !led1;
-    while(pi.readable()) {
-        temp = pi.getc();
-        pi.putc(temp);
-        if (temp=='1') led2 = 1;
-        if (temp=='0') led2 = 0;
-    }
-}
 int main()
 {
     pi.baud(9600);
     pi.attach(&dev_recv, Serial::RxIrq);
     while(1) {
-        sleep();
+        #bluetooth connection code
+        #if (bluetooth connected) {
+            #if (song changed) {
+                #pi.putc(0); #tell raspi to start functions
+            #}
+        #}
+        #else (try again for bluetooth) {
+        #}
+        
+        if (pi.getc()){
+            #start updating LCD, LED, motor, etc.
+        }
+            
     }
 }
 
