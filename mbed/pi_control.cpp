@@ -7,6 +7,7 @@ int main()
 {
     pi.baud(9600);
     pi.attach(&dev_recv, Serial::RxIrq);
+    pi.putc('0');
     while(1) {
         #bluetooth connection code
         #if (bluetooth connected) {
@@ -17,10 +18,10 @@ int main()
         #else (try again for bluetooth) {
         #}
         
-        if (pi.getc()){
+        #if (pi.getc()){
             #unpack list of song info
             #start updating LCD, LED, motor, etc.
-        }
+        #}
             
     }
 }
