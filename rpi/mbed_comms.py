@@ -15,10 +15,8 @@ while 1:
     sleep(0.03)    
     data_left = ser.inWaiting()
     rx_data += ser.data(data_left)
-    if rx_data:
+    if ser.inWaiting != 0:
         get_current_song(sp)
         toggle_playback(sp)
-    else:
-        continue
 
 #mbed controlling all physical components
