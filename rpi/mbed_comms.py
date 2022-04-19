@@ -4,7 +4,7 @@ import serial
 import os
 from spotify_client import SpotifyClient
 
-ser = serial.Serial("/dev/ttyACM0", baudrate = 9600, parity=serial.PARITY_NONE,
+ser = serial.Serial("/dev/ttyACM0", baudrate=9600, parity=serial.PARITY_NONE,
 stopbits=serial.STOPBITS_ONE, bytesize=serial.EIGHTBITS, timeout=1)
 spotify_client = SpotifyClient()
 while 1:
@@ -12,7 +12,21 @@ while 1:
     song_info = {'uri': None}
     if ser.inWaiting():
         data = ser.readline()
-        print(data)
+        print(f'Data Received: {data}')
+        if data == 'n':
+            spotify_client.next_track()
+            print('Going to next track...')
+        elif data == 'p':
+            spotify_client.previous_track()
+            print('Going to previous track...')
+        elif data == '<':
+            spotify_client.rewind()
+            print('Rewinding track...')
+        elif data == '>':
+            spotify_client.toggle_playback()
+            print('Toggling playback...')
+        else:
+            print('Err: Invalid character received')
     else:
         # ser.write(str.encode('hello'))
         new_song_info = spotify_client.get_current_song()
@@ -21,10 +35,3 @@ while 1:
             ser.write(str.encode(f"Song Name:{song_info['name']}\nArtist: {song_info['artist']}\nTempo: {song_info['tempo']}"))
         sleep(1)
     sleep(0.03)    
-    # data_left = ser.inWaiting() #wait until data is recieved
-    # if data_left != 0:
-        # rx_data += ser.data(data_left)
-        # get_current_song(sp)
-        #send song info list to mbed        
-        # ser.write(rx_data) #tell mbed to update
-#mbed controlling all physical components
