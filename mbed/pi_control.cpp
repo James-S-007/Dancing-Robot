@@ -2,6 +2,15 @@
 //Pi mbed USB Slave function
 // connect mbed to Pi USB
 RawSerial  pi(USBTX, USBRX);
+char temp = 0;
+
+void dev_recv()
+{
+    while(pi.readable()) {
+        temp = pi.getc();
+        pi.putc(temp);
+    }
+}
 
 int main()
 {
