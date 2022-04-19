@@ -18,6 +18,7 @@ int main()
         #}
         
         if (pi.getc()){
+            #unpack list of song info
             #start updating LCD, LED, motor, etc.
         }
             
