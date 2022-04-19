@@ -11,13 +11,13 @@ BusOut myled(LED1,LED2,LED3,LED4);
 Serial blue(p28,p27);
 uLCD_4DGL uLCD(p28, p27, p29); // create a global uLCD object
 
-volatile int tempo = 0; // bpm
-volatile char song_ctrl = NULL_CHAR; // symbols for controlling spotify
+volatile int tempo = 0;  // bpm
+volatile char song_ctrl = NULL_CHAR;  // symbols for controlling spotify
 volatile bool new_song_info = false;
 // string curr_track; // current track name
 
 void display_thread(void const *argument){
-    while(1){
+    while(1) {
         if (new_song_info) {
             // track name
             uLCD.locate(1, 2);
@@ -32,6 +32,8 @@ void display_thread(void const *argument){
             uLCD.text_height(1);
             uLCD.text_width(1);
             uLCD.printf(tempo); // print tempo in BPM
+
+            new_song_info = false;
         }
 
         Thread::wait(2000); // update every 2 seconds
@@ -41,38 +43,38 @@ void display_thread(void const *argument){
 
 void bt_thread(void const *argument) {
     while(1) {
-        char bnum=0;
-        char bhit=0;
+        char bnum = 0;
+        char bhit = 0;
         if (blue.readable()) {
             if (blue.getc()=='!') {
                 if (blue.getc()=='B') { //button data packet
                     bnum = blue.getc(); //button number
                     bhit = blue.getc(); //1=hit, 0=release
-                    if (blue.getc()==char(~('!' + 'B' + bnum + bhit))) { //checksum OK?
-                        myled = bnum - '0'; //current button number will appear on LEDs
+                    if (blue.getc() == char(~('!' + 'B' + bnum + bhit))) { //checksum OK?
+                        // myled = bnum - '0'; //current button number will appear on LEDs
                         switch (bnum) {
-                            case '5': //button 5 up arrow - next song
+                            case '5':  // button 5 up arrow - next song
                                 if (bhit=='1') {
                                     song_ctrl = 'n'; // n means next song
                                 } else {
                                     song_ctrl = NULL_CHAR // return variable to having no value when button is released
                                 }
                                 break;
-                            case '6': //button 6 down arrow - previous song
+                            case '6':  // button 6 down arrow - previous song
                                 if (bhit=='1') {
                                     song_ctrl = 'p'; // p means previous song
                                 } else {
                                     song_ctrl = NULL_CHAR;
                                 }
                                 break;
-                            case '7': //button 7 left arrow - rewind
+                            case '7':  // button 7 left arrow - rewind
                                 if (bhit=='1') {
                                     song_ctrl = '<'; // < means rewind
                                 } else {
                                     song_ctrl = NULL_CHAR;
                                 }
                                 break;
-                            case '8': //button 8 right arrow - forward
+                            case '8':  // button 8 right arrow - forward
                                 if (bhit=='1') {
                                     song_ctrl = '>'; // > means forward
                                 } else {
@@ -92,31 +94,30 @@ void bt_thread(void const *argument) {
 }
 
 void pi_thread(void const *argument){
-    pi.baud(9600);
-    while (1) {
-        
+        while (1) {    
         if(pi.readable()) {
             while (pi.readable()) {
-                temp = pi.getc();
+                pi.getc();
             }
+            // new_song_info = true;
         }
         if (song_ctrl != NULL_CHAR) {
             pi.putc(song_ctrl);
             song_ctrl = NULL_CHAR;
         }
     }
+
     Thread::wait(1000);
 }
 
 
 
-int main()
-{
-   
-   
+int main() {
+    pi.baud(9600);
     thread.start(display_thread);
     thread.start(bt_thread);
     thread.start(pi_thread);
-   
-       
+    while (1) {
+        Thread::wait(1000);
+    }  
 }
