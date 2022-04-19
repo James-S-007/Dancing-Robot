@@ -17,7 +17,7 @@ while 1:
     if data_left != 0:
         rx_data += ser.data(data_left)
         get_current_song(sp)
-        toggle_playback(sp)
+        #send song info list to mbed        
         ser.write(rx_data) #tell mbed to update
 
 #mbed controlling all physical components
