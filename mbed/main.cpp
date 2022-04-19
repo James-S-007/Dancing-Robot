@@ -8,7 +8,7 @@
 Serial  pi(USBTX, USBRX);
 BusOut myled(LED1,LED2,LED3,LED4);
 Serial blue(p28,p27);
-uLCD_4DGL uLCD(p28, p27, p29); // create a global uLCD object
+uLCD_4DGL uLCD(p9, p10, p11); // create a global uLCD object
 
 volatile int tempo = 0;  // bpm
 volatile char song_ctrl = NULL_CHAR;  // symbols for controlling spotify
