@@ -19,6 +19,7 @@ void display_track_thread(void const *argument){
         uLCD.text_height(2);
         uLCD.text_width(2);
         uLCD.printf(curr_track); // print current track name
+        Thread::wait(2000); // update every 2 seconds
     }
     
 void display_tempo_thread(void const *argument){
@@ -28,12 +29,16 @@ void display_tempo_thread(void const *argument){
         uLCD.text_height(1);
         uLCD.text_width(1);
         uLCD.printf(tempo); // print tempo in BPM
+        Thread::wait(2000); // update every 2 seconds
     }
 
 int main()
 {
     char bnum=0;
     char bhit=0;
+    
+    thread.start(display_track_thread);
+    thread.start(display_tempo_thread);
     
         if (blue.getc()=='!') {
             if (blue.getc()=='B') { //button data packet
