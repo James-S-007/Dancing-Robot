@@ -2,6 +2,7 @@
 #include "uLCD_4DGL.h"
 #include "PinDetect.h"
 #include "rtos.h"
+#include "motordriver.h"
 
 BusOut myled(LED1,LED2,LED3,LED4);
 Serial blue(p28,p27);
