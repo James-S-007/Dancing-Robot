@@ -21,6 +21,7 @@ void display_track_thread(void const *argument){
         uLCD.printf(curr_track); // print current track name
         Thread::wait(2000); // update every 2 seconds
     }
+}
     
 void display_tempo_thread(void const *argument){
     while(1){
@@ -31,6 +32,7 @@ void display_tempo_thread(void const *argument){
         uLCD.printf(tempo); // print tempo in BPM
         Thread::wait(2000); // update every 2 seconds
     }
+}
 
 int main()
 {
