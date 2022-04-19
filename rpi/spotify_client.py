@@ -18,16 +18,16 @@ class SpotifyClient:
         self.sp = spotipy.Spotify(auth_manager=self.auth_manager)
 
         # lambda wrappers to match syntax of other functions: function(sp)
-        self.next_track = lambda sp : sp.next_track()
-        self.previous_track = lambda sp: sp.previous_track()
-        self.rewind = lambda sp : sp.seek_track(0)
+        self.next_track = lambda : self.sp.next_track()
+        self.previous_track = lambda : self.sp.previous_track()
+        self.rewind = lambda : self.sp.seek_track(0)
 
     def main(self):
-        curr_track = get_current_song(sp)
+        curr_track = self.get_current_song(sp)
         temp_track = None
         # TODO(James): send initial info to mbed
         while True:
-            temp_track = get_current_song(sp)
+            temp_track = self.get_current_song(sp)
             if temp_track['uri'] != curr_track['uri']:
                 print('Detected song change')
                 curr_track = temp_track
@@ -66,7 +66,7 @@ class SpotifyClient:
         Returns: None
     """
     def toggle_playback(self):
-        curr_track = sp.current_playback()
+        curr_track = self.sp.current_playback()
         if curr_track['is_playing']:
             self.sp.pause_playback()
         else:

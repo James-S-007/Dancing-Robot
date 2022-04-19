@@ -13,16 +13,16 @@ while 1:
     if ser.inWaiting():
         data = ser.readline()
         print(f'Data Received: {data}')
-        if data == 'n':
+        if data == b'n':
             spotify_client.next_track()
             print('Going to next track...')
-        elif data == 'p':
+        elif data == b'p':
             spotify_client.previous_track()
             print('Going to previous track...')
-        elif data == '<':
+        elif data == b'<':
             spotify_client.rewind()
             print('Rewinding track...')
-        elif data == '>':
+        elif data == b'>':
             spotify_client.toggle_playback()
             print('Toggling playback...')
         else:
