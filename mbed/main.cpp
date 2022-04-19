@@ -8,6 +8,10 @@ BusOut myled(LED1,LED2,LED3,LED4);
 Serial blue(p28,p27);
 uLCD_4DGL uLCD(p28, p27, p29); // create a global uLCD object
 
+int tempo; // bpm
+string curr_track; // current track name
+char song_ctrl; // symbols for controlling spotify
+
 void display_track_thread(void const *argument){
     while(1){
         // probably needs call here to retrieve current track from pi
@@ -38,32 +42,32 @@ int main()
                 if (blue.getc()==char(~('!' + 'B' + bnum + bhit))) { //checksum OK?
                     myled = bnum - '0'; //current button number will appear on LEDs
                     switch (bnum) {
-                        case '1': //button 5 up arrow - next song
+                        case '5': //button 5 up arrow - next song
                             if (bhit=='1') {
-                                //add hit code here
+                                song_ctrl = 'n'; // n means next song
                             } else {
-                                //add release code here
+                                song_ctrl = null; // return variable to having no value when button is released
                             }
                             break;
-                        case '2': //button 6 down arrow - previous song
+                        case '6': //button 6 down arrow - previous song
                             if (bhit=='1') {
-                                //add hit code here
+                                song_ctrl = 'p'; // p means previous song
                             } else {
-                                //add release code here
+                                song_ctrl = null;
                             }
                             break;
-                        case '3': //button 7 left arrow - rewind
+                        case '7': //button 7 left arrow - rewind
                             if (bhit=='1') {
-                                //add hit code here
+                                song_ctrl = '<'; // < means rewind
                             } else {
-                                //add release code here
+                                song_ctrl = null;
                             }
                             break;
-                        case '4': //button 8 right arrow - forward
+                        case '8': //button 8 right arrow - forward
                             if (bhit=='1') {
-                                //add hit code here
+                                song_ctrl = '>'; // > means forward
                             } else {
-                                //add release code here
+                                song_ctrl = null;
                             }
                             break;
                         default:
