@@ -6,9 +6,13 @@
 #define NULL_CHAR 'z'
 
 Serial  pi(USBTX, USBRX);
-BusOut myled(LED1,LED2,LED3,LED4);
+//BusOut myled(LED1,LED2,LED3,LED4);
 Serial blue(p28,p27);
 uLCD_4DGL uLCD(p9, p10, p11); // create a global uLCD object
+DigitalOut led1(LED1);
+DigitalOut led2(LED2);
+DigitalOut led3(LED3);
+DigitalOut led4(LED4);
 
 volatile int tempo = 0;  // bpm
 volatile char song_ctrl = NULL_CHAR;  // symbols for controlling spotify
@@ -18,6 +22,7 @@ volatile bool new_song_info = false;
 void display_thread(void const *argument){
     while(1) {
         if (new_song_info) {
+            led1!=led1;
             // track name
             uLCD.locate(1, 2);
             uLCD.text_height(2);
@@ -43,6 +48,7 @@ void bt_thread(void const *argument) {
         char bnum = 0;
         char bhit = 0;
         if (blue.readable()) {
+            led2!=led2;
             if (blue.getc()=='!') {
                 if (blue.getc()=='B') { //button data packet
                     bnum = blue.getc(); //button number
@@ -93,12 +99,14 @@ void bt_thread(void const *argument) {
 void pi_thread(void const *argument){
         while (1) {    
         if(pi.readable()) {
+            led3!=led3;
             while (pi.readable()) {
                 pi.getc();
             }
             // new_song_info = true;
         }
         if (song_ctrl != NULL_CHAR) {
+            led41=led4;
             pi.putc(song_ctrl);
             song_ctrl = NULL_CHAR;
         }
