@@ -1,10 +1,5 @@
-from abc import get_cache_token
-import json
-import os.path
-from pprint import pprint
 import spotipy
 from spotipy.oauth2 import SpotifyOAuth
-from time import sleep
 
 from config import CLIENT_ID, CLIENT_SECRET
 
@@ -16,26 +11,6 @@ class SpotifyClient:
     def __init__(self):
         self.auth_manager = SpotifyOAuth(scope=SCOPE, client_id=CLIENT_ID, client_secret=CLIENT_SECRET, redirect_uri=REDIRECT_URI)
         self.sp = spotipy.Spotify(auth_manager=self.auth_manager)
-
-        # lambda wrappers to match syntax of other functions: function(sp)
-        self.next_track = lambda : self.sp.next_track()
-        self.previous_track = lambda : self.sp.previous_track()
-        self.rewind = lambda : self.sp.seek_track(0)
-
-    def main(self):
-        curr_track = self.get_current_song(sp)
-        temp_track = None
-        # TODO(James): send initial info to mbed
-        while True:
-            temp_track = self.get_current_song(sp)
-            if temp_track['uri'] != curr_track['uri']:
-                print('Detected song change')
-                curr_track = temp_track
-                # send info to mbed
-            # elif recv serial input from mbed
-                # do respective functions (toggle, playback, skip, etc.)
-            else:
-                sleep(REFRESH_DUR)
 
 
     def get_current_song(self):
@@ -72,8 +47,12 @@ class SpotifyClient:
         else:
             self.sp.start_playback()
 
-    
+    # function wrappers to match syntax of other member functions: function(sp)
+    def next_track(self):
+        self.sp.next_track()
 
-
-    if __name__ == '__main__':
-        main()
+    def previous_track(self):
+        self.sp.previous_track()
+        
+    def rewind(self):
+        self.sp.seek_track(0)
