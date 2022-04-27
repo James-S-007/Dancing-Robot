@@ -7,8 +7,8 @@ from SpotifyClient import SpotifyClient
 ser = serial.Serial("/dev/ttyACM0", baudrate=9600, parity=serial.PARITY_NONE, stopbits=serial.STOPBITS_ONE, bytesize=serial.EIGHTBITS, timeout=1)
 spotify_client = SpotifyClient()
 
+curr_song_uri = None
 while True:
-    curr_song_uri = None
     if ser.inWaiting():
         data = ser.readline()
         print(f'Data Received: {data}')
@@ -29,10 +29,10 @@ while True:
     else:
         song_info = spotify_client.get_current_song()
         if not song_info:
-            
             song_info['name'] = 'No track playing'
             song_info['artist'] = ''
             song_info['tempo'] = 0
+            song_info['uri'] = ''
         if song_info['uri'] != curr_song_uri:
             str_to_send = str.encode(f"?{song_info['name']}\n${song_info['artist']}\n")
             print('Sending: {str_to_send}')
