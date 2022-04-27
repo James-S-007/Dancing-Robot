@@ -29,10 +29,13 @@ while True:
     else:
         song_info = spotify_client.get_current_song()
         if not song_info:
+            
             song_info['name'] = 'No track playing'
             song_info['artist'] = ''
             song_info['tempo'] = 0
         if song_info['uri'] != curr_song_uri:
-            ser.write(str.encode(f"?{song_info['name']}\n${song_info['artist']}\n")) # Tempo: {song_info['tempo']}"))
+            str_to_send = str.encode(f"?{song_info['name']}\n${song_info['artist']}\n")
+            print('Sending: {str_to_send}')
+            ser.write(str_to_send) # Tempo: {song_info['tempo']}"))
         sleep(0.2)
     sleep(0.03)

@@ -26,12 +26,13 @@ class SpotifyClient:
         """
         song_info = {}
         curr_track = self.sp.current_playback()
-        song_info['uri'] = curr_track['item']['uri']
-        song_info['name'] = curr_track['item']['name']
-        song_info['artist'] = curr_track['item']['artists'][0]['name']  # only get first artist (if multiple)
+        if curr_track:
+            song_info['uri'] = curr_track['item']['uri']
+            song_info['name'] = curr_track['item']['name']
+            song_info['artist'] = curr_track['item']['artists'][0]['name']  # only get first artist (if multiple)
         
-        track_features = self.sp.audio_features([song_info['uri']])
-        song_info['tempo'] = track_features[0]['tempo']  # additional potential useful parameters to get include 'danceability', 'energy', 'liveness', 'loudness'
+            track_features = self.sp.audio_features([song_info['uri']])
+            song_info['tempo'] = track_features[0]['tempo']  # additional potential useful parameters to get include 'danceability', 'energy', 'liveness', 'loudness'
         return song_info
 
 
