@@ -1,12 +1,19 @@
 #https://www.engineersgarage.com/articles-raspberry-pi-serial-communication-uart-protocol-ttl-port-usb-serial-boards/
 from time import sleep
-import serial
 import os
+import platform
+import serial
 from SpotifyClient import SpotifyClient
 
-ser = serial.Serial("/dev/ttyACM0", baudrate=9600, parity=serial.PARITY_NONE, stopbits=serial.STOPBITS_ONE, bytesize=serial.EIGHTBITS, timeout=1)
-spotify_client = SpotifyClient()
+os_info = platform.platform()
+COM_PORT = None
+if 'windows' in os_info.lower():
+    COM_PORT = 'COM7'
+elif 'linux' in os_info.lower():
+    COM_PORT = '/dev/ttyACM0'
 
+ser = serial.Serial(COM_PORT, baudrate=9600, parity=serial.PARITY_NONE, stopbits=serial.STOPBITS_ONE, bytesize=serial.EIGHTBITS, timeout=1)
+spotify_client = SpotifyClient()
 curr_song_uri = None
 while True:
     if ser.inWaiting():
@@ -35,7 +42,7 @@ while True:
             song_info['uri'] = ''
         if song_info['uri'] != curr_song_uri:
             curr_song_uri = song_info['uri']
-            str_to_send = str.encode(f"?{song_info['name']}#${song_info['artist']}#")
+            str_to_send = str.encode(f"SG{song_info['name']}XAT{song_info['artist']}X")
             print(f'Sending: {str_to_send}')
             ser.write(str_to_send) # Tempo: {song_info['tempo']}"))
         sleep(0.2)
