@@ -56,3 +56,7 @@ class SpotifyClient:
         
     def rewind(self):
         self.sp.seek_track(0)
+
+if __name__ == '__main__':
+    sp_client = SpotifyClient()
+    sp_client.get_current_song()
