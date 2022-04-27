@@ -25,12 +25,7 @@ char artist[100];
 
 void display_thread(void const *argument){
     while(1) {
-        led4 = 1;
-        while(pi.readable()) {
-            uLCD.putc(pi.getc());
-        }
-        led4 = 0;
-        /*if (new_song_info) {
+        if (new_song_info) {
             // track name
             uLCD.cls();
             uLCD.locate(1, 1);
@@ -45,18 +40,12 @@ void display_thread(void const *argument){
             buf_mtx.unlock();
 
             // tempo
-            // uLCD.locate(1, 10);
-            // uLCD.printf("Tempo: %d", );
-            
-            buf_mtx.lock();
-            memset(buf, 0, sizeof(buf));
-            // memset(song_name, 0, sizeof(song_name));
-            // memset(artist, 0, sizeof(artist));
-            buf_mtx.unlock();
+            uLCD.locate(1, 10);
+            uLCD.printf("Tempo: %d", tempo);
             
             new_song_info = false;
             led1 = 0;
-        }*/
+        }
 
         Thread::wait(500); // update every 2 seconds
     }
@@ -112,41 +101,37 @@ void bt_thread(void const *argument) {
         }
         
     Thread::wait(1000);    
-    
+
     }
 }
 
 void pi_thread(void const *argument){
     while (1) {    
         if (pi.readable()) {
-            led2 = 1;
-            
             char c = pi.getc();
-            led3 = 1;
             buf_mtx.lock();
             while (pi.readable() && c != '?' && idx < 200 - 2) {
                 buf[idx++] = c;
                 c = pi.getc();
             }
+            
             buf_mtx.unlock();
 
             if (c == '?') {
                 new_song_info = true;
                 buf_mtx.lock();
                 buf[idx] = 0;
+                sscanf(buf, "%u %s %s", &tempo, song_name, artist);
                 buf_mtx.unlock();
                 idx = 0;
             } else {
+                buf[idx++] = c;
                 new_song_info = false;
             }
             
-            led3 = 0;
             // sscanf(buf, "SONG:%[^\n]ARTIST:%[^\n]", song_name, artist);
-            buf_mtx.lock();
-            sscanf(buf, "%s %s", song_name, artist);
-            buf_mtx.unlock();
+            
             // new_song_info = true;
-            led2 = 0;
         }
 
         if (song_ctrl != NULL_CHAR) {
@@ -155,6 +140,7 @@ void pi_thread(void const *argument){
         }
     
     Thread::wait(50);
+
     }
 }
 
@@ -164,8 +150,8 @@ int main() {
     pi.baud(115200);
     Thread thread1(display_thread);
     Thread thread2(bt_thread);
-    // Thread thread3(pi_thread);
-    while (1) {
+    Thread thread3(pi_thread);
+    while(1) {
         Thread::wait(1000);
     }  
 }
