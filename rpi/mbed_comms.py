@@ -12,7 +12,7 @@ if 'windows' in os_info.lower():
 elif 'linux' in os_info.lower():
     COM_PORT = '/dev/ttyACM0'
 
-ser = serial.Serial(COM_PORT, baudrate=9600, parity=serial.PARITY_NONE, stopbits=serial.STOPBITS_ONE, bytesize=serial.EIGHTBITS, timeout=1)
+ser = serial.Serial(COM_PORT, baudrate=115200)#, parity=serial.PARITY_NONE, stopbits=serial.STOPBITS_ONE, bytesize=serial.EIGHTBITS, timeout=1)
 spotify_client = SpotifyClient()
 curr_song_uri = None
 while True:
@@ -42,7 +42,10 @@ while True:
             song_info['uri'] = ''
         if song_info['uri'] != curr_song_uri:
             curr_song_uri = song_info['uri']
-            str_to_send = str.encode(f"SG{song_info['name']}XAT{song_info['artist']}X")
+            song_info['name'] = song_info['name'].replace(' ', '-')
+            song_info['artist'] = song_info['artist'].replace(' ', '-')
+            str_to_send = str.encode(f"{song_info['name']} {song_info['artist']}?")
+            # str_to_send = str.encode(f"SONG:{song_info['name']}\nARTIST:{song_info['artist']}\n?")
             print(f'Sending: {str_to_send}')
             ser.write(str_to_send) # Tempo: {song_info['tempo']}"))
         sleep(0.2)
