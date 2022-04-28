@@ -13,7 +13,14 @@ James Springer          -- Section B -- Electrical Engineering
 ## Project Goal
 This project programs a simple robot to "dance" in beat with any given song played on Spotify. The robot has dual DC motors powering its wheels, allowing it to complete a sequence of unique movements. The speed of those movements are scaled to the beats per minute (BPM) of the song being played on a user's Spotify account, which can be controlled by a different device via bluetooth.
 
-## Parts List
+## Hardware
+
+___
+
+insert block/circuit diagram diagram
+
+### Parts List
+
 |Part| Description |
 |--|--|
 | Arm Mbed LPC1768 | controls the robot's movements, displays song info on LCD screen, controls the RGB LED, and communicates with the Bluetooth board |
@@ -32,7 +39,13 @@ This project programs a simple robot to "dance" in beat with any given song play
 | anker External Battery Bank | powers the Mbed and raspberry pi |
 | RGB LED | changes colors and flashes to the music |
 
-## Libraries Used
+## Software
+
+___
+
+![final gaant chart](https://user-images.githubusercontent.com/78691589/165658820-d672c42c-3ec0-4d4e-9a79-ef439e9d8f82.JPG)
+
+### Libraries Used
 | Library | Installation |
 | ------- | ------------ |
 | uLCD (mbed) | zip |
@@ -40,17 +53,57 @@ This project programs a simple robot to "dance" in beat with any given song play
 | Motordriver (mbed) | zip |
 | spotipy | pip install spotipy |
 
-## Hardware
-insert block/circuit diagram diagram
+### SpotifyClient Methods
 
-## Software
-![final gaant chart](https://user-images.githubusercontent.com/78691589/165658820-d672c42c-3ec0-4d4e-9a79-ef439e9d8f82.JPG)
+#### `get_current_song()`
+| Item | Description |
+| ---- | ----------- |
+| Summary | Gets relavant info of currently playing track from Spotify's Web API |
+| Params | None |
+| Returns | Dictionary of parameters for current song |
+
+##### Return Dictionary
+| Dictionary Key | Description |
+| -------------- | ----------- |
+| 'uri' | Unique resource identifier of song used by Spotify's API |
+| 'name' | Name of the song |
+| 'artist' | Name of the artist |
+| 'tempo' | Tempo of the currently playing Song |
+
+#### `toggle_playback()`
+| Item | Description |
+| ---- | ----------- |
+| Summary | Pauses currently playing song if playing and resumes if currently paused |
+| Params | None |
+| Returns | None |
+
+#### `next_track()`
+| Item | Description |
+| ---- | ----------- |
+| Summary | Skips to next track in playlist |
+| Params | None |
+| Returns | None |
+
+#### `previous_track()`
+| Item | Description |
+| ---- | ----------- |
+| Summary | Goes to previous track in playlist |
+| Params | None |
+| Returns | None |
+
+#### `rewind()`
+| Item | Description |
+| ---- | ----------- |
+| Summary | Seeks to beginning of currently playing track |
+| Params | None |
+| Returns | None |
+
+### mbed
+
+Insert description of mbed methods
 
 RTOS
 - The threads allow each action to occur simultaneously
-
-Spotify API
-- The Spotify Client is how the Raspberry Pi obtains the songs' data in real time
 
 Raspberry Pi/mbed Communication
 - The robot's mbed and Raspberry Pi are able to send and recieve information from each other, such as the songs' data
@@ -60,4 +113,7 @@ DANCE!
 
 
 ## Demo
+
+___
+
 embed video of it working with explanation
