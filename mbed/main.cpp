@@ -1,8 +1,36 @@
 #include "mbed.h"
 #include "uLCD_4DGL.h"
 #include "rtos.h"
+#include "motordriver.h"
 
 #define NULL_CHAR 'z'
+
+//Class to control an RGB LED using three PWM pins
+class RGBLed
+{
+public:
+    RGBLed(PinName redpin, PinName greenpin, PinName bluepin);
+    void write(float red,float green, float blue);
+private:
+    PwmOut _redpin;
+    PwmOut _greenpin;
+    PwmOut _bluepin;
+};
+
+RGBLed::RGBLed (PinName redpin, PinName greenpin, PinName bluepin)
+    : _redpin(redpin), _greenpin(greenpin), _bluepin(bluepin)
+{
+    //50Hz PWM clock default a bit too low, go to 2000Hz (less flicker)
+    _redpin.period(0.0005);
+}
+
+void RGBLed::write(float red,float green, float blue)
+{
+    _redpin = red;
+    _greenpin = green;
+    _bluepin = blue;
+}
+
 
 Serial  pi(USBTX, USBRX);
 Serial blue(p28,p27);
@@ -11,6 +39,10 @@ DigitalOut led1(LED1);
 DigitalOut led2(LED2);
 DigitalOut led3(LED3);
 DigitalOut led4(LED4);
+Motor A(p22, p6, p5, 1); // pwm, fwd, rev, can brake 
+Motor B(p21, p7, p8, 1); // pwm, fwd, rev, can brake
+RGBLed myRGBled(p23,p24,p25); //RGB PWM pins
+
 
 Mutex buf_mtx;
 
@@ -144,13 +176,114 @@ void pi_thread(void const *argument){
     }
 }
 
+void RGB_thread(void const *argument){
+    srand((unsigned)time(NULL));
+    float newRand;
+    while(1) {
+      //get the tempo from the pi to use as mood setting
+      if (tempo < 80){ //r+b and slower, magenta
+        newRand = (float) rand()/RAND_MAX;
+        myRGBled.write(newRand,0.0,1.0);
+      }
+      else if (80<tempo && tempo<=90){ //reggae, blue
+        newRand = (float) rand()/RAND_MAX;
+        myRGBled.write(0.0,newRand,1.0);
+      }
+      else if (90<tempo && tempo<=120){ //hiphop, cyan
+        newRand = (float) rand()/RAND_MAX;
+        myRGBled.write(0.0,1.0,newRand);
+      }
+      else if (120<tempo && tempo<=125){ //jazz, green
+        newRand = (float) rand()/RAND_MAX;
+        myRGBled.write(newRand,1.0,0.0);
+      }
+      else if (125<tempo && tempo<=140){ //rock, yellow
+        newRand = (float) rand()/RAND_MAX;
+        myRGBled.write(1.0,newRand,0.0);
+      }
+      else { //metal and faster, red
+        newRand = (float) rand()/RAND_MAX;
+        myRGBled.write(1.0,0.0,newRand);
+      }
+      Thread::wait(1000);
+    }
+}
+
+
+void all_dances(void const *argument){
+    srand((unsigned)time(NULL));
+    
+    while(1) {
+        float s;
+        int randNum = (rand() % 3) + 1;
+        
+        if (randNum == 1){
+            A.speed(0.0); 
+            B.speed(0.0);
+            s = (float(tempo) / 1000) * 5;
+            A.speed(s); //forward
+            B.speed(-s);
+            Thread::wait(1000);
+            A.speed(0.0); 
+            B.speed(0.0); 
+            s = (float(tempo) / 1000) * 5;
+            A.speed(-s); //reverse
+            B.speed(s);
+            Thread::wait(1000);
+        }
+        else if (randNum == 2){
+            A.speed(0.0); 
+            B.speed(0.0);
+            A.stop(0.0); 
+            s = (float(tempo) / 1000) * 5;
+            B.speed(s); //left turn
+            Thread::wait(1000);
+            A.speed(0.0); 
+            B.speed(0.0);
+            B.stop(0.0); 
+            s = (float(tempo) / 1000) * 5;
+            A.speed(-s); //right turn
+            Thread::wait(1000);
+            A.speed(0.0); 
+            B.speed(0.0);
+            s = (float(tempo) / 1000) * 5;
+            A.speed(s); //twirl 
+            B.speed(s); 
+            Thread::wait(1000);
+        }
+        else if (randNum == 3){
+            A.speed(0.0); 
+            B.speed(0.0);
+            s = (float(tempo) / 1000) * 5;
+            A.speed(s); //reverse
+            B.speed(-s);
+            Thread::wait(1000);
+            A.speed(0.0); 
+            B.speed(0.0);
+            A.stop(0.0); 
+            s = (float(tempo) / 1000) * 5;
+            B.speed(s); //left turn
+            Thread::wait(1000);
+            A.speed(0.0); 
+            B.speed(0.0);
+            B.stop(0.0); 
+            s = (float(tempo) / 1000) * 5;
+            A.speed(-s); //right turn
+            Thread::wait(1000);
+        }
+        // Thread::wait(1000);
+    }
+}
+
 
 
 int main() {
     pi.baud(115200);
-    Thread thread1(display_thread);
-    Thread thread2(bt_thread);
-    Thread thread3(pi_thread);
+    Thread t1(display_thread);
+    Thread t2(bt_thread);
+    Thread t3(pi_thread);
+    Thread t4(RGB_thread);
+    Thread t5(all_dances);
     while(1) {
         Thread::wait(1000);
     }  
