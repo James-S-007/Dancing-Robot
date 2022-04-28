@@ -121,7 +121,7 @@ void pi_thread(void const *argument){
                 new_song_info = true;
                 buf_mtx.lock();
                 buf[idx] = 0;
-                sscanf(buf, "%u %s %s", &tempo, song_name, artist);
+                sscanf(buf, "%u %[^\n] %[^\n]", &tempo, song_name, artist);
                 buf_mtx.unlock();
                 idx = 0;
             } else {

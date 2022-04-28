@@ -5,6 +5,8 @@ import platform
 import serial
 from SpotifyClient import SpotifyClient
 
+SERIAL_SLICE_SIZE = 12
+
 os_info = platform.platform()
 COM_PORT = None
 if 'windows' in os_info.lower():
@@ -42,11 +44,21 @@ while True:
             song_info['uri'] = ''
         if song_info['uri'] != curr_song_uri:
             curr_song_uri = song_info['uri']
-            song_info['name'] = song_info['name'].replace(' ', '-')
-            song_info['artist'] = song_info['artist'].replace(' ', '-')
-            str_to_send = str.encode(f"{song_info['name']} {song_info['artist']}?")
+            # song_info['name'] = song_info['name'].replace(' ', '-')
+            # song_info['artist'] = song_info['artist'].replace(' ', '-')
+            str_to_send = f"{round(song_info['tempo'])} {song_info['name']}\n {song_info['artist']}\n?"
+            i = 0
+            while i < len(str_to_send):
+                if len(str_to_send) - i < SERIAL_SLICE_SIZE:
+                    print(str_to_send[i:])
+                    ser.write(str.encode(str_to_send[i:]))
+                else:
+                    print(str_to_send[i:i+SERIAL_SLICE_SIZE])
+                    ser.write(str.encode(str_to_send[i:i+SERIAL_SLICE_SIZE]))
+                i += SERIAL_SLICE_SIZE
+                sleep(1)
             # str_to_send = str.encode(f"SONG:{song_info['name']}\nARTIST:{song_info['artist']}\n?")
-            print(f'Sending: {str_to_send}')
-            ser.write(str_to_send) # Tempo: {song_info['tempo']}"))
+            # print(f'Sending: {str_to_send}')
+            # ser.write(str_to_send) # Tempo: {song_info['tempo']}"))
         sleep(0.2)
     sleep(0.03)
