@@ -19,7 +19,7 @@ spotify_client = SpotifyClient()
 curr_song_uri = None
 while True:
     if ser.inWaiting():
-        data = ser.readline()
+        data = ser.read()
         print(f'Data Received: {data}')
         if data == b'n':
             spotify_client.next_track()
@@ -39,7 +39,7 @@ while True:
         song_info = spotify_client.get_current_song()
         if not song_info:
             song_info['name'] = 'No track playing'
-            song_info['artist'] = ''
+            song_info['artist'] = '-'
             song_info['tempo'] = 0
             song_info['uri'] = ''
         if song_info['uri'] != curr_song_uri:

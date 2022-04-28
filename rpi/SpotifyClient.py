@@ -43,7 +43,9 @@ class SpotifyClient:
     """
     def toggle_playback(self):
         curr_track = self.sp.current_playback()
-        if curr_track['is_playing']:
+        if not curr_track:
+            return  # no active device
+        elif curr_track['is_playing']:
             self.sp.pause_playback()
         else:
             self.sp.start_playback()
