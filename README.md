@@ -1,4 +1,4 @@
-# ECE 4180 -- Dancing Robot
+# ECE 4180 -- Spotify Spinner
 This webpage will explain the design and functionality of a "dancing" robot.
 
 ## Team
@@ -8,7 +8,7 @@ Brook Lancaster -- Section B -- Electrical Engineering
 James Springer -- Section B -- Electrical Engineering
 
 ## Project Goal
-This project programs a simple robot to "dance" in beat with any given song played on Spotify. The robot has dual DC motors powering it's wheels, allowing it to complete a sequence of unique movements. The speed of those movements are scaled to the beats per minute (BPM) of the song being played on a user's Spotify account, which is communicated to the robot via bluetooth.
+This project programs a simple robot to "dance" in beat with any given song played on Spotify. The robot has dual DC motors powering its wheels, allowing it to complete a sequence of unique movements. The speed of those movements are scaled to the beats per minute (BPM) of the song being played on a user's Spotify account, which can be controlled by a different device via bluetooth.
 
 ## Parts List
 |Part| Description |
@@ -35,8 +35,10 @@ insert block/circuit diagram diagram
 ## Software
 ![final gaant chart](https://user-images.githubusercontent.com/78691589/165658820-d672c42c-3ec0-4d4e-9a79-ef439e9d8f82.JPG)
 
-
-insert example code for each piece of the functionality
+RTOS
+Spotify Client
+Raspberry Pi/mbed Communication
+DANCE!
 
 ## Demo
 embed video of it working with explanation
