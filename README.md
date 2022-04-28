@@ -33,7 +33,8 @@ This project programs a simple robot to "dance" in beat with any given song play
 insert block/circuit diagram diagram
 
 ## Software
-insert flow chart
+![final gaant chart](https://user-images.githubusercontent.com/78691589/165658820-d672c42c-3ec0-4d4e-9a79-ef439e9d8f82.JPG)
+
 
 insert example code for each piece of the functionality
 
