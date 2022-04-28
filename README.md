@@ -102,13 +102,16 @@ ___
 
 Insert description of mbed methods
 
-RTOS
+### RTOS
 - The threads allow each action to occur simultaneously
 
-Raspberry Pi/mbed Communication
+### Spotify API
+- The Spotify Client is how the Raspberry Pi obtains the songs' data in real time
+
+### Raspberry Pi/mbed Communication
 - The robot's mbed and Raspberry Pi are able to send and recieve information from each other, such as the songs' data
 
-DANCE!
+### DANCE!
 - [explaination of dance code]
 
 
