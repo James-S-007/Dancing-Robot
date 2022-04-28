@@ -32,6 +32,14 @@ This project programs a simple robot to "dance" in beat with any given song play
 | anker External Battery Bank | powers the Mbed and raspberry pi |
 | RGB LED | changes colors and flashes to the music |
 
+## Libraries Used
+| Library | Installation |
+| ------- | ------------ |
+| uLCD (mbed) | zip |
+| rtos (mbed) | zip |
+| Motordriver (mbed) | zip |
+| spotipy | pip install spotipy |
+
 ## Hardware
 insert block/circuit diagram diagram
 
