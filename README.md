@@ -15,8 +15,6 @@ This project programs a simple robot to "dance" in beat with any given song play
 
 ## Hardware
 
-___
-
 insert block/circuit diagram diagram
 
 ### Parts List
@@ -40,9 +38,6 @@ insert block/circuit diagram diagram
 | RGB LED | changes colors and flashes to the music |
 
 ## Software
-
-___
-
 ![final gaant chart](https://user-images.githubusercontent.com/78691589/165658820-d672c42c-3ec0-4d4e-9a79-ef439e9d8f82.JPG)
 
 ### Libraries Used
@@ -53,7 +48,8 @@ ___
 | Motordriver (mbed) | zip |
 | spotipy | pip install spotipy |
 
-### SpotifyClient Methods
+### SpotifyClient
+The SpotifyClient class allows the Raspberry Pi to obtain data from Spotify for the current user via Spotify's web API
 
 #### `get_current_song()`
 | Item | Description |
@@ -105,9 +101,6 @@ Insert description of mbed methods
 ### RTOS
 - The threads allow each action to occur simultaneously
 
-### Spotify API
-- The Spotify Client is how the Raspberry Pi obtains the songs' data in real time
-
 ### Raspberry Pi/mbed Communication
 - The robot's mbed and Raspberry Pi are able to send and recieve information from each other, such as the songs' data
 
@@ -116,7 +109,5 @@ Insert description of mbed methods
 
 
 ## Demo
-
-___
 
 embed video of it working with explanation
