@@ -46,16 +46,16 @@ insert block/circuit diagram diagram
 ## Software
 ![final gaant chart](https://user-images.githubusercontent.com/78691589/165658820-d672c42c-3ec0-4d4e-9a79-ef439e9d8f82.JPG)
 
-RTOS
+### RTOS
 - The threads allow each action to occur simultaneously
 
-Spotify API
+### Spotify API
 - The Spotify Client is how the Raspberry Pi obtains the songs' data in real time
 
-Raspberry Pi/mbed Communication
+### Raspberry Pi/mbed Communication
 - The robot's mbed and Raspberry Pi are able to send and recieve information from each other, such as the songs' data
 
-DANCE!
+### DANCE!
 - [explaination of dance code]
 
 
