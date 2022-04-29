@@ -3,7 +3,8 @@
 Compiled below are the contributors, basic timeline, and brief outline of the creation of a "dancing" robot. The design and functionality of this unique robot is discussed in depth. Further details regarding the specific programming used on this project can be found within each folder of code.
 
 ## Team
-Brook Lancaster _Section B_ __Electrical Engineering__
+Brook Lancaster 
+> _Section B_, __Electrical Engineering__
 
 Grayson Eady _Section B_ __Electrical Engineering__
 
