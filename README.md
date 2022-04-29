@@ -15,7 +15,7 @@ This project programs a simple robot to "dance" in beat with any given song play
 
 ## Hardware
 
-![Interconnect Diagram]
+<img width="831" alt="image" src="https://user-images.githubusercontent.com/71736743/165875672-98920392-0796-4739-9783-75d82ce16e7a.png">
 
 ### Parts List
 
