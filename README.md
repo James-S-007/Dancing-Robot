@@ -102,7 +102,7 @@ The SpotifyClient class allows the Raspberry Pi to obtain data from Spotify for 
 #### `mbed_comms.py`
 | Item | Description |
 | ---- | ----------- |
-| Summary | Prints the song inf
+| Summary | Sends Bluetooth command to the Pi, which communicates with the Spotify Client to control the song playing and then sends the updated song information to the mbed to be printed |
 | Params | None |
 | Returns | None |
 
