@@ -111,3 +111,9 @@ Insert description of mbed methods
 ## Demo
 
 embed video of it working with explanation
+
+## Finished Device
+
+![7c839bd67e3d4aca91828d1f599186ab](https://user-images.githubusercontent.com/71736743/165880641-44749a30-6aed-4387-9dbc-1ab5e4ac281e.jpeg)
+![bf836c9607b74d178ffb65ff0115e933](https://user-images.githubusercontent.com/71736743/165880654-f3606139-18f3-4465-9115-ef3decb4f857.jpeg)
+![26826890665d4b68a456a633f6ba58cc](https://user-images.githubusercontent.com/71736743/165880635-7b73b97c-126b-4b1a-bdf0-25be11e461e3.jpeg)
