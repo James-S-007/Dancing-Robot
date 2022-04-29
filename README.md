@@ -156,8 +156,9 @@ Threads allowed our robot to perform multiple tasks for an unlimited amount of t
 
 ## Demo
 
-Below is the demonstration of our Spotify Spinner. To begin it does this stuff stuff stuff. Then the Bluetooth, then stuff.
-embed video of it working with explanation
+Below is the demonstration of our robot, the Spotify Spinner. The video shows the robot uisng bluetooth to receive details about the song played then flashing the RGB LED and dancing at the appropriate speed. It also shows a separate phone connected to the robot's Mbed via blueooth which is being used to play, pause, skips songs, and return to songs. The LCD display, though difficult to read in the video, shows the song name, the artist, and the tempo of the song.
+
+https://youtu.be/tTAUi6Gy8LE
 
 ## Finished Device
 
