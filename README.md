@@ -94,18 +94,52 @@ The SpotifyClient class allows the Raspberry Pi to obtain data from Spotify for 
 | Params | None |
 | Returns | None |
 
-### mbed
+### mbed to Pi Communication
 
-Insert description of mbed methods
+#### `mbed_comms.py`
+| Item | Description |
+| ---- | ----------- |
+| Summary | Prints the song inf
+| Params | None |
+| Returns | None |
+
 
 ### RTOS
-- The threads allow each action to occur simultaneously
 
-### Raspberry Pi/mbed Communication
-- The robot's mbed and Raspberry Pi are able to send and recieve information from each other, such as the songs' data
+#### `display_thread()`
+| Item | Description |
+| ---- | ----------- |
+| Summary | Prints the song information onto the LCD in real time |
+| Params | None |
+| Returns | None |
 
-### DANCE!
-- [explaination of dance code]
+#### `bt_thread()`
+| Item | Description |
+| ---- | ----------- |
+| Summary | Allows Blufruit App to control Spotify |
+| Params | None |
+| Returns | None |
+
+#### `pi_thread()`
+| Item | Description |
+| ---- | ----------- |
+| Summary | Sends and recieves information between the Raspberry Pi and the mbed |
+| Params | None |
+| Returns | None |
+
+#### `RGB_thread()`
+| Item | Description |
+| ---- | ----------- |
+| Summary | Reads the BPM of the song and sets a mood related light |
+| Params | None |
+| Returns | None |
+
+#### `all_dances()`
+| Item | Description |
+| ---- | ----------- |
+| Summary | Houses the dance routines that the robot cycles through |
+| Params | None |
+| Returns | None |
 
 
 ## Demo
