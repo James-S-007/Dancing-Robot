@@ -3,13 +3,13 @@
 Compiled below are the contributors, basic timeline, and brief outline of the creation of a "dancing" robot. The design and functionality of this unique robot is discussed in depth. Further details regarding the specific programming used on this project can be found within each folder of code.
 
 ## Team
-Brook Lancaster _Section B_ __Electrical Engineering
+Brook Lancaster _Section B_ __Electrical Engineering__
 
-Grayson Eady _Section B_ __Electrical Engineering
+Grayson Eady _Section B_ __Electrical Engineering__
 
-James Springer _Section B_ __Electrical Engineering
+James Springer _Section B_ __Electrical Engineering__
 
-Joyce Karanouh-Schuler _Section B_ __Electrical Engineering
+Joyce Karanouh-Schuler _Section B_ __Electrical Engineering__
 
 ## Project Goal
 This project programs a simple robot to "dance" in beat with any given song played on Spotify. The robot has dual DC motors powering its wheels, allowing it to complete a sequence of unique movements. The speed of those movements are scaled to the beats per minute (BPM) of the song being played on a user's Spotify account, which can be controlled by a different device via bluetooth.
