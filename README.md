@@ -158,7 +158,7 @@ Threads allowed our robot to perform multiple tasks for an unlimited amount of t
 
 Below is the demonstration of our robot, the Spotify Spinner. The video shows the robot uisng bluetooth to receive details about the song played then flashing the RGB LED and dancing at the appropriate speed. It also shows a separate phone connected to the robot's Mbed via blueooth which is being used to play, pause, skips songs, and return to songs. The LCD display, though difficult to read in the video, shows the song name, the artist, and the tempo of the song.
 
-https://youtu.be/tTAUi6Gy8LE
+[![Dancing Robot Demo](https://user-images.githubusercontent.com/71736743/166067592-c09813a0-619b-4274-ab8d-06e02d1c4db3.png)](https://youtu.be/tTAUi6Gy8LE)
 
 ## Finished Device
 
