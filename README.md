@@ -1,4 +1,4 @@
-# Embedded Systems Design Final Project # ##Spotify Spinner
+# Embedded Systems Design Final Project
 ## Spotify Spinner
 Compiled below are the contributors, basic timeline, and brief outline of the creation of a "dancing" robot. The design and functionality of this unique robot is discussed in depth. Further details regarding the specific programming used on this project can be found within each folder of code.
 
