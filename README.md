@@ -158,6 +158,7 @@ Threads allowed our robot to perform multiple tasks for an unlimited amount of t
 
 Below is the demonstration of our Spotify Spinner. To begin it does this stuff stuff stuff. Then the Bluetooth, then stuff.
 embed video of it working with explanation
+[![IMAGE ALT TEXT HERE](https://img.youtube.com/vi/YOUTUBE_VIDEO_ID_HERE/0.jpg)](https://www.youtube.com/watch?v=tTAUi6Gy8LE)
 
 ## Finished Device
 
