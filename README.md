@@ -15,7 +15,7 @@ This project programs a simple robot to "dance" in beat with any given song play
 
 ## Hardware
 
-insert block/circuit diagram diagram
+![Interconnect Diagram]
 
 ### Parts List
 
