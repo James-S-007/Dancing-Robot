@@ -99,15 +99,19 @@ The SpotifyClient class allows the Raspberry Pi to obtain data from Spotify for 
 
 ### mbed to Pi Communication
 
+Sends Bluetooth command to the Pi, which communicates with the Spotify Client to control the song playing and then sends the updated song information to the mbed to be printed
+
 #### `mbed_comms.py`
 | Item | Description |
 | ---- | ----------- |
-| Summary | Sends Bluetooth command to the Pi, which communicates with the Spotify Client to control the song playing and then sends the updated song information to the mbed to be printed |
+| Summary | Serial communication |
 | Params | None |
 | Returns | None |
 
 
 ### RTOS
+
+Threads allowed our robot to perform multiple tasks for an unlimited amount of time.
 
 #### `display_thread()`
 | Item | Description |
@@ -147,9 +151,12 @@ The SpotifyClient class allows the Raspberry Pi to obtain data from Spotify for 
 
 ## Demo
 
+Below is the demonstration of our Spotify Spinner. To begin it does this stuff stuff stuff. Then the Bluetooth, then stuff.
 embed video of it working with explanation
 
 ## Finished Device
+
+Our Spotify Spinner prototype is adorned with a couple of sprigs of leaves to represent the flora filled spring semester, and many yellow-jackets around the circuitry -- even on the banner-like balloon attached to the back of the robot.
 
 ![7c839bd67e3d4aca91828d1f599186ab](https://user-images.githubusercontent.com/71736743/165880641-44749a30-6aed-4387-9dbc-1ab5e4ac281e.jpeg)
 ![bf836c9607b74d178ffb65ff0115e933](https://user-images.githubusercontent.com/71736743/165880654-f3606139-18f3-4465-9115-ef3decb4f857.jpeg)
