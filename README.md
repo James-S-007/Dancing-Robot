@@ -1,4 +1,4 @@
-# ECE 4180 -- Spotify Spinner
+# ECE 4180  ## Spotify Spinner
 This webpage will explain the design and functionality of a "dancing" robot.
 
 ## Team
